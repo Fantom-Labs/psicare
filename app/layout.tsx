@@ -18,6 +18,11 @@ const plusJakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   title: 'Psicare — Bem-Estar Emocional',
   description: 'Plataforma de monitoramento do bem-estar emocional que conecta pacientes e profissionais de saúde mental.',
+  icons: {
+    icon: '/favicon.svg',
+    shortcut: '/favicon.svg',
+    apple: '/favicon.svg',
+  },
 }
 
 export const viewport: Viewport = {

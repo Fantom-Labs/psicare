@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Bell, Menu } from 'lucide-react'
 
 export function TopAppBar() {
@@ -15,13 +16,15 @@ export function TopAppBar() {
           <Menu size={20} strokeWidth={1.8} className="text-[#1A1A2E]" />
         </button>
 
-        {/* Center: Logo */}
-        <div className="flex items-center gap-2">
-          <span className="text-[#5B4CF5] font-bold text-[18px] tracking-tight leading-none">
-            Psicare
-          </span>
-          <div className="w-[7px] h-[7px] rounded-full bg-[#5B4CF5]/50" />
-        </div>
+        {/* Center: Logo wordmark (icon + Psicare text) */}
+        <Image
+          src="/logo.svg"
+          alt="Psicare"
+          width={110}
+          height={27}
+          priority
+          className="select-none"
+        />
 
         {/* Right: Notification button */}
         <button

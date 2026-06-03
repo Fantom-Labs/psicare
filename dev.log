@@ -2,20 +2,16 @@
 > psicare@0.1.0 dev
 > next dev
 
-   ▲ Next.js 15.1.0
+ ⚠ Warning: Next.js inferred your workspace root, but it may not be correct.
+ We detected multiple lockfiles and selected the directory of C:\Users\windows\Downloads\psicare\package-lock.json as the root directory.
+ To silence this warning, set `outputFileTracingRoot` in your Next.js config, or consider removing one of the lockfiles if it's not needed.
+   See https://nextjs.org/docs/app/api-reference/config/next-config-js/output#caveats for more information.
+ Detected additional lockfiles: 
+   * C:\Users\windows\Downloads\psicare\psicare\package-lock.json
+
+   ▲ Next.js 15.5.19
    - Local:        http://localhost:3000
    - Network:      http://192.168.0.3:3000
 
  ✓ Starting...
- ✓ Ready in 2.6s
- ○ Compiling /habits ...
- ✓ Compiled /habits in 5.5s (665 modules)
- GET /habits 200 in 5828ms
- ✓ Compiled in 175ms (321 modules)
- ○ Compiling /home ...
- ✓ Compiled /home in 659ms (664 modules)
- GET /home 200 in 816ms
- GET /habits 200 in 34ms
- GET /home 200 in 16ms
- GET /home 200 in 210ms
- GET /home 200 in 69ms
+ ✓ Ready in 2.2s
