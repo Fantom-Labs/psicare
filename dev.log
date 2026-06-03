@@ -8,3 +8,14 @@
 
  ✓ Starting...
  ✓ Ready in 2.6s
+ ○ Compiling /habits ...
+ ✓ Compiled /habits in 5.5s (665 modules)
+ GET /habits 200 in 5828ms
+ ✓ Compiled in 175ms (321 modules)
+ ○ Compiling /home ...
+ ✓ Compiled /home in 659ms (664 modules)
+ GET /home 200 in 816ms
+ GET /habits 200 in 34ms
+ GET /home 200 in 16ms
+ GET /home 200 in 210ms
+ GET /home 200 in 69ms
