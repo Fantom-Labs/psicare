@@ -107,8 +107,8 @@ export function HabitsList() {
         </button>
       </div>
 
-      {/* Habits list */}
-      <div className="flex flex-col gap-3">
+      {/* Habits list — 1 col mobile, 2 cols desktop */}
+      <div className="flex flex-col gap-3 lg:grid lg:grid-cols-2">
         {HABITS.map((habit) => {
           const isDone = done.has(habit.id)
           return (

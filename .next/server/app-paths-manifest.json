@@ -1,6 +1,1 @@
-{
-  "/(app)/habits/page": "app/(app)/habits/page.js",
-  "/(app)/reports/page": "app/(app)/reports/page.js",
-  "/(app)/profile/page": "app/(app)/profile/page.js",
-  "/(app)/home/page": "app/(app)/home/page.js"
-}
+{}

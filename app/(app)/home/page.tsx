@@ -5,24 +5,27 @@ import { HabitsList } from '@/components/home/HabitsList'
 
 export default function HomePage() {
   return (
-    <div className="flex flex-col gap-4 px-5 py-5 pb-10">
+    <div className="px-5 py-5 flex flex-col gap-4 lg:px-10 lg:py-8 lg:gap-6 lg:max-w-5xl lg:mx-0">
 
-      {/* Welcome Text & Mood Selector — Figma: 16:317 */}
+      {/* Mood Selector — largura total em ambos */}
       <MoodSelector defaultValue={5} />
 
-      {/* Dashboard Bento Grid — Figma: 1:273 */}
-      {/* Grid: 1 coluna, 2 rows, gap 16px, padding horizontal 0 (já vem do px-5 pai) */}
-      <section className="flex flex-col gap-4">
-        {/* Sequência Atual Card — Figma: 1:274 — 350×214px */}
-        <StreakCard />
+      {/*
+        Mobile:  coluna única
+        Desktop: 2 colunas — [stats (1fr)] [hábitos (1.5fr)]
+      */}
+      <div className="flex flex-col gap-4 lg:grid lg:grid-cols-[1fr_1.5fr] lg:gap-6 lg:items-start">
 
-        {/* Conclusão Semanal Card — Figma: 1:338 — 350×140px */}
-        <WeeklyCompletionCard />
-      </section>
+        {/* Coluna esquerda: cards de estatísticas */}
+        <div className="flex flex-col gap-4">
+          <StreakCard />
+          <WeeklyCompletionCard />
+        </div>
 
-      {/* Section: Daily Habits List — Figma: 16:3 */}
-      <HabitsList />
+        {/* Coluna direita: lista de hábitos */}
+        <HabitsList />
 
+      </div>
     </div>
   )
 }
