@@ -110,14 +110,14 @@ export function DrawerMenu({ open, onClose }: DrawerMenuProps) {
 
         {/* Sair */}
         <div className="border-t border-gray-100 p-5">
-          <button className="flex items-center gap-3 w-full py-3 px-4 rounded-xl hover:bg-red-50 transition-colors">
+          <Link href="/login" className="flex items-center gap-3 w-full py-3 px-4 rounded-xl hover:bg-red-50 transition-colors">
             <div className="w-9 h-9 rounded-full bg-[#fee2e2] flex items-center justify-center shrink-0">
               <LogOut size={16} strokeWidth={1.8} className="text-[#ff6b6b]" />
             </div>
             <span className="text-[#ff6b6b] text-[15px] font-semibold font-[family-name:var(--font-plus-jakarta)]">
               Sair
             </span>
-          </button>
+          </Link>
         </div>
       </aside>
     </>
