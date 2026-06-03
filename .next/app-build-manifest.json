@@ -11,15 +11,20 @@
       "static/chunks/main-app.js",
       "static/chunks/app/(app)/layout.js"
     ],
-    "/(app)/profile/page": [
+    "/(app)/habits/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(app)/profile/page.js"
+      "static/chunks/app/(app)/habits/page.js"
     ],
-    "/(app)/agenda/page": [
+    "/(app)/home/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/(app)/agenda/page.js"
+      "static/chunks/app/(app)/home/page.js"
+    ],
+    "/(app)/reports/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/(app)/reports/page.js"
     ]
   }
 }

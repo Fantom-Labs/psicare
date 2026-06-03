@@ -1,7 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import {
-  User, Bell, Lock, HelpCircle, LogOut,
+  User, Bell, Lock, HelpCircle, LogOut, Info,
   ChevronRight, Target, Calendar, Award, Camera,
 } from 'lucide-react'
 import { cn } from '@/lib/utils'
@@ -68,6 +69,7 @@ function SettingsRow({
   iconColor,
   danger = false,
   withBorder = true,
+  href,
 }: {
   icon: React.ElementType
   label: string
@@ -75,14 +77,10 @@ function SettingsRow({
   iconColor: string
   danger?: boolean
   withBorder?: boolean
+  href?: string
 }) {
-  return (
-    <button
-      className={cn(
-        'flex items-center justify-between w-full py-[17px] px-4 text-left transition-colors hover:bg-gray-50/50',
-        withBorder && 'border-b border-[rgba(228,225,236,0.5)]'
-      )}
-    >
+  const inner = (
+    <>
       <div className="flex items-center gap-3">
         <div
           className="w-10 h-10 rounded-full flex items-center justify-center shrink-0"
@@ -102,8 +100,18 @@ function SettingsRow({
       {!danger && (
         <ChevronRight size={16} strokeWidth={1.8} className="text-[#9b92b8] shrink-0" />
       )}
-    </button>
+    </>
   )
+
+  const cls = cn(
+    'flex items-center justify-between w-full py-[17px] px-4 text-left transition-colors hover:bg-gray-50/50',
+    withBorder && 'border-b border-[rgba(228,225,236,0.5)]'
+  )
+
+  if (href) {
+    return <Link href={href} className={cls}>{inner}</Link>
+  }
+  return <button className={cls}>{inner}</button>
 }
 
 /* ══ Page ════════════════════════════════════════════════ */
@@ -210,6 +218,13 @@ export default function ProfilePage() {
             label="Ajuda"
             iconBg="#dbeafe"
             iconColor="#2563eb"
+          />
+          <SettingsRow
+            icon={Info}
+            label="Sobre"
+            iconBg="rgba(230,222,255,0.4)"
+            iconColor="#5e3bdc"
+            href="/sobre"
           />
           <SettingsRow
             icon={LogOut}

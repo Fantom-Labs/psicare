@@ -5,13 +5,22 @@ import { usePathname } from 'next/navigation'
 import { Home, ListChecks, BarChart2, User, Calendar } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
-/* Colors extracted from Figma node 53:468
-   active text/icon  → #6541ED
-   inactive text/icon→ #494455
-   bar bg            → rgba(248,249,254,0.80)
-   border-top        → rgba(202,195,216,0.10)
-   bar shadow        → 0 -10px 30px rgba(124,77,255,0.08)
+/* Colors from Figma 53:468
+   active  → #6541ED
+   inactive→ #494455
+   bar bg  → rgba(248,249,254,0.80) + backdrop-blur(20px)
+   border  → rgba(202,195,216,0.10)
+   shadow  → 0 -10px 30px rgba(124,77,255,0.08)
+   selected circle gradient → from-[#6329E5] to-[#6459F7]
 */
+
+const NAV_ITEMS = [
+  { href: '/agenda',  icon: Calendar,   label: 'Agenda'     },
+  { href: '/habits',  icon: ListChecks, label: 'Hábitos'    },
+  { href: '/home',    icon: Home,       label: 'Início'     },
+  { href: '/reports', icon: BarChart2,  label: 'Relatórios' },
+  { href: '/profile', icon: User,       label: 'Perfil'     },
+]
 
 function NavItem({
   href,
@@ -27,62 +36,33 @@ function NavItem({
   return (
     <Link
       href={href}
-      className="flex flex-col items-center gap-[4px] min-w-[40px] px-1"
       aria-current={active ? 'page' : undefined}
+      className="flex flex-col items-center gap-[4px] flex-1 min-w-0"
     >
-      <Icon
-        size={active ? 20 : 18}
-        strokeWidth={active ? 2.2 : 1.8}
+      {/* Ícone — círculo gradiente quando ativo, ícone simples quando inativo */}
+      <div
         className={cn(
-          'transition-colors duration-200',
-          active ? 'text-[#6541ED]' : 'text-[#494455]'
+          'flex items-center justify-center rounded-full transition-all duration-200',
+          active
+            ? 'w-14 h-14 -mt-5 bg-gradient-to-tr from-[#6329E5] to-[#6459F7] shadow-[0_4px_12px_rgba(99,41,229,0.35)]'
+            : 'w-6 h-6'
         )}
-      />
+      >
+        <Icon
+          size={active ? 22 : 18}
+          strokeWidth={active ? 2.2 : 1.8}
+          className={active ? 'text-white' : 'text-[#494455]'}
+        />
+      </div>
+
+      {/* Label */}
       <span
         className={cn(
-          'text-[10px] leading-[14px] font-medium transition-colors duration-200',
-          'font-[family-name:var(--font-plus-jakarta)]',
+          'text-[10px] leading-[14px] font-medium truncate font-[family-name:var(--font-plus-jakarta)]',
           active ? 'text-[#6541ED]' : 'text-[#494455]'
         )}
       >
         {label}
-      </span>
-    </Link>
-  )
-}
-
-/* Botão central — Início — visualmente destacado */
-function HomeNavItem({ active }: { active: boolean }) {
-  return (
-    <Link
-      href="/home"
-      className="flex flex-col items-center gap-[4px] -mt-3"
-      aria-current={active ? 'page' : undefined}
-      aria-label="Início"
-    >
-      <div
-        className={cn(
-          'w-14 h-14 rounded-full flex items-center justify-center transition-all duration-200',
-          'shadow-[0_4px_12px_rgba(99,41,229,0.25)]',
-          active
-            ? 'bg-[#6329E5] scale-105'
-            : 'bg-gradient-to-tr from-[#6329E5] to-[#6459F7]'
-        )}
-      >
-        <Home
-          size={22}
-          strokeWidth={active ? 2.4 : 2}
-          className="text-white"
-        />
-      </div>
-      <span
-        className={cn(
-          'text-[10px] leading-[14px] font-medium',
-          'font-[family-name:var(--font-plus-jakarta)]',
-          active ? 'text-[#6541ED]' : 'text-[#494455]'
-        )}
-      >
-        Início
       </span>
     </Link>
   )
@@ -97,7 +77,7 @@ export function BottomNavBar() {
         <nav
           className={cn(
             'flex items-end justify-between',
-            'px-4 pt-3 pb-8',
+            'px-2 pt-2 pb-8',
             'rounded-t-[32px]',
             'bg-[rgba(248,249,254,0.80)] backdrop-blur-[20px]',
             'border-t border-[rgba(202,195,216,0.10)]',
@@ -105,40 +85,15 @@ export function BottomNavBar() {
           )}
           aria-label="Navegação principal"
         >
-          {/* Agenda */}
-          <NavItem
-            href="/agenda"
-            icon={Calendar}
-            label="Agenda"
-            active={pathname === '/agenda'}
-          />
-
-          {/* Hábitos */}
-          <NavItem
-            href="/habits"
-            icon={ListChecks}
-            label="Hábitos"
-            active={pathname === '/habits'}
-          />
-
-          {/* Início — botão central em destaque */}
-          <HomeNavItem active={pathname === '/home'} />
-
-          {/* Relatórios */}
-          <NavItem
-            href="/reports"
-            icon={BarChart2}
-            label="Relatórios"
-            active={pathname === '/reports'}
-          />
-
-          {/* Perfil */}
-          <NavItem
-            href="/profile"
-            icon={User}
-            label="Perfil"
-            active={pathname === '/profile'}
-          />
+          {NAV_ITEMS.map(({ href, icon, label }) => (
+            <NavItem
+              key={href}
+              href={href}
+              icon={icon}
+              label={label}
+              active={pathname === href}
+            />
+          ))}
         </nav>
       </div>
     </div>
