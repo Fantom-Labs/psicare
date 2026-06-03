@@ -55,27 +55,50 @@ export default function SobrePage() {
     <div className="flex flex-col gap-8 pt-4 pb-32 px-5 lg:px-10 lg:py-8 lg:max-w-2xl">
 
       {/* ── Intro ── */}
-      <section className="flex flex-col items-center gap-4 text-center pt-2">
-        <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-[#6329E5] to-[#6459F7] flex items-center justify-center shadow-[0_8px_24px_rgba(99,41,229,0.30)]">
-          <Heart size={28} strokeWidth={1.8} className="text-white" />
-        </div>
+      <section className="flex flex-col gap-4 pt-2">
+        <div className="w-full bg-gradient-to-br from-[#f5f0ff] to-[#eff6ff] rounded-2xl p-5 border border-[rgba(91,76,245,0.08)] flex flex-col gap-4">
 
-        <div className="flex flex-col gap-2">
-          <h1 className="text-[#1b1b22] text-[24px] font-bold leading-[30px] font-[family-name:var(--font-plus-jakarta)]">
-            Sobre o Psicare
-          </h1>
-          <p className="text-[#484555] text-[15px] font-medium leading-[24px] font-[family-name:var(--font-plus-jakarta)] max-w-[320px]">
-            Uma plataforma criada para transformar o autocuidado emocional em um hábito diário sustentável.
-          </p>
-        </div>
+          {/* Ícone + título */}
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#6329E5] to-[#6459F7] flex items-center justify-center shadow-[0_4px_12px_rgba(99,41,229,0.30)] shrink-0">
+              <Heart size={20} strokeWidth={1.8} className="text-white" />
+            </div>
+            <h1 className="text-[#5B4CF5] text-[17px] font-bold leading-snug font-[family-name:var(--font-plus-jakarta)]">
+              Psicare — Plataforma de Monitoramento do Bem-Estar Emocional
+            </h1>
+          </div>
 
-        <div className="w-full bg-gradient-to-br from-[#f5f0ff] to-[#eff6ff] rounded-2xl p-5 border border-[rgba(91,76,245,0.08)] text-left">
-          <p className="text-[#5e3bdc] text-[13px] font-semibold uppercase tracking-wider mb-2 font-[family-name:var(--font-plus-jakarta)]">
-            Nossa Missão
-          </p>
-          <p className="text-[#1b1b22] text-[14px] font-medium leading-[22px] font-[family-name:var(--font-plus-jakarta)]">
-            Fortalecer o vínculo entre paciente e terapeuta com dados reais e contextualizados, promovendo saúde mental acessível e contínua.
-          </p>
+          {/* Descrição */}
+          <div className="flex flex-col gap-3">
+            <p className="text-[#1b1b22] text-[14px] font-medium leading-[22px] font-[family-name:var(--font-plus-jakarta)]">
+              O <span className="font-bold">Psicare</span> é um projeto acadêmico de plataforma digital de monitoramento emocional desenvolvido para a disciplina de Desenvolvimento Web. A plataforma conecta pacientes e profissionais de saúde mental por meio de registro diário de humor, checklists de hábitos e medicação, com foco em privacidade e continuidade terapêutica.
+            </p>
+            <p className="text-[#1b1b22] text-[14px] font-medium leading-[22px] font-[family-name:var(--font-plus-jakarta)]">
+              O sistema possui dois portais distintos: o <span className="font-bold">Portal do Paciente</span>, onde o usuário registra seu humor diário, acompanha hábitos, controla medicações e visualiza seu histórico emocional; e o <span className="font-bold">Portal do Profissional</span>, voltado ao terapeuta que acompanha a evolução dos pacientes e gerencia acessos com total privacidade e conformidade com a LGPD.
+            </p>
+          </div>
+
+          {/* Stack tags */}
+          <div className="flex flex-wrap gap-2 pt-1">
+            {[
+              'Next.js 15',
+              'TypeScript 5',
+              'Tailwind CSS',
+              'Supabase',
+              'TanStack Query v5',
+              'Zustand',
+              'Capacitor',
+              'Vercel',
+              'PWA',
+            ].map(tag => (
+              <span
+                key={tag}
+                className="px-3 py-1 rounded-full border border-[#5B4CF5] text-[#5B4CF5] text-[12px] font-semibold font-[family-name:var(--font-plus-jakarta)]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
         </div>
       </section>
 

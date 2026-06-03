@@ -17,15 +17,52 @@ O Psicare conecta pacientes e profissionais de saúde mental por meio de registr
 
 | Camada | Tecnologia |
 |---|---|
-| App iOS | React Native 0.75 + Expo SDK 52 + Expo Router v4 |
+| App iOS | **Capacitor** — empacota o build Next.js num shell nativo iOS |
 | Web | Next.js 15 App Router + PWA (next-pwa) |
-| Estilo | NativeWind v4 + Tailwind CSS v4 + Shadcn/ui |
+| Estilo | Tailwind CSS v3 + Shadcn/ui |
 | Estado | TanStack Query v5 + Zustand |
 | Backend | Supabase (PostgreSQL + Auth + Storage + Realtime + Edge Functions) |
-| Monorepo | Turborepo |
-| Deploy | Vercel (Web) + EAS Build (iOS) |
+| Deploy | Vercel (Web) + Capacitor + Xcode (iOS) |
 | Observabilidade | Sentry + PostHog |
 | E-mail | Resend |
+
+---
+
+## Estratégia Mobile — Capacitor
+
+Em vez de manter duas bases de código separadas (Next.js + React Native), o Psicare adota o **Capacitor** para empacotar o próprio web app como um app iOS nativo.
+
+```
+Next.js build  →  Capacitor shell  →  .ipa  →  App Store
+```
+
+### Por que Capacitor
+
+| Critério | Capacitor | React Native |
+|---|---|---|
+| Reutiliza código atual | ✅ 100% | ❌ reescrever tudo |
+| Publicação na App Store | ✅ | ✅ |
+| Push notifications iOS | ✅ via plugin | ✅ |
+| Acesso a APIs nativas | ✅ via plugins | ✅ |
+| Base de código única | ✅ | ❌ monorepo separado |
+| Esforço de implementação | Baixo | Alto |
+
+### Plugins Capacitor previstos
+
+| Plugin | Função |
+|---|---|
+| `@capacitor/push-notifications` | Lembretes de check-in e medicação |
+| `@capacitor/preferences` | Armazenamento seguro de tokens JWT |
+| `@capacitor/status-bar` | Personalização da status bar iOS |
+| `@capacitor/splash-screen` | Splash screen nativa |
+
+### Fluxo de build iOS
+
+```
+npm run build          # gera o Next.js static/export
+npx cap sync           # copia o build para o projeto iOS nativo
+npx cap open ios       # abre no Xcode para assinar e publicar
+```
 
 ---
 
@@ -180,3 +217,25 @@ Autenticado
 - **Stitch**: https://stitch.withgoogle.com/projects/5194532362651983996
 - **Trello**: https://trello.com/invite/b/6a179a9e28eb46913275b306/ATTI6c08ba100b35b91e9611db738fa487200CFB851D/psicarer
 - **PRD completo**: [project.md](project.md)
+
+---
+
+## Status do Projeto
+
+**Estágio atual: Scaffold Frontend**
+
+Navegação e UI estática funcionando, mas sem backend, auth real ou gerenciamento de estado conectado.
+
+| Camada | Status |
+|---|---|
+| Rotas e navegação (Next.js App Router) | ✅ Implementado |
+| Componentes de layout (sidebar, bottom nav, top bar) | ✅ Implementado |
+| Componentes de home (MoodSelector, StreakCard, hábitos) | ✅ Implementado |
+| Design system (tokens Tailwind, cores, tipografia) | ✅ Implementado |
+| Páginas de auth (login, register) | ✅ UI estática — sem lógica real |
+| Supabase (DB, Auth, Realtime) | ❌ Não integrado |
+| TanStack Query + Zustand | ❌ Não instalado |
+| Shadcn/ui + Recharts | ❌ Não instalado |
+| next-auth / OAuth callback | ❌ Não implementado |
+| App iOS (React Native / Expo) | ❌ Não iniciado |
+| Monorepo Turborepo | ❌ Não configurado |

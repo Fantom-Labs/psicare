@@ -15,3 +15,38 @@
 
  ✓ Starting...
  ✓ Ready in 1689ms
+ ○ Compiling /habits ...
+ ✓ Compiled /habits in 3.9s (764 modules)
+ GET /habits 200 in 4525ms
+ ✓ Compiled in 192ms (309 modules)
+ ✓ Compiled in 449ms (746 modules)
+ GET /habits 200 in 119ms
+ ✓ Compiled in 268ms (746 modules)
+ GET /habits 200 in 103ms
+ GET /habits 200 in 227ms
+ ✓ Compiled in 466ms (746 modules)
+ GET /habits 200 in 73ms
+ ✓ Compiled in 519ms (746 modules)
+ GET /habits 200 in 133ms
+ ○ Compiling /agenda ...
+ ✓ Compiled /agenda in 753ms (767 modules)
+ GET /agenda 200 in 1201ms
+ GET /habits 200 in 439ms
+ GET /agenda 200 in 25ms
+ ○ Compiling /home ...
+ ✓ Compiled /home in 752ms (778 modules)
+ GET /home 200 in 921ms
+ ✓ Compiled in 802ms (792 modules)
+ GET /agenda 200 in 200ms
+ GET /home 200 in 206ms
+ ✓ Compiled in 399ms (792 modules)
+ GET /agenda 200 in 162ms
+ GET /home 200 in 162ms
+ GET /home 200 in 84ms
+ GET /agenda 200 in 23ms
+ ✓ Compiled /profile in 348ms (791 modules)
+ GET /profile 200 in 431ms
+ ✓ Compiled /reports in 433ms (802 modules)
+ GET /reports 200 in 510ms
+ GET /habits 200 in 39ms
+ GET /home 200 in 71ms

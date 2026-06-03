@@ -52,30 +52,27 @@ Nome: Dr. Lucas, 42 anos, psicólogo clínico. Atende 15 pacientes semanais. Que
 
 ## 02 · Decisão Tecnológica — iOS + Web
 
-### 2.1 Estratégia: Universal App com React Native + Next.js
+### 2.1 Estratégia: Web App + iOS via Capacitor
 
-A escolha central é separar a experiência em duas camadas complementares — maximizando performance nativa no iOS e SEO/acessibilidade na web — sem duplicar a lógica de negócio.
+A escolha central é manter uma única base de código Next.js e empacotar o mesmo build como app iOS via Capacitor — eliminando a necessidade de manter React Native em paralelo.
 
-- **Monorepo:** Turborepo. Código compartilhado: hooks, API calls, tipos TS, design tokens.
-- **App iOS:** React Native (Expo) com EAS Build. OTA updates sem passar pela App Store.
-- **Web:** Next.js 15 (App Router) como PWA, deploy no Vercel.
+- **Base única:** Next.js 15 (App Router) como PWA, deploy no Vercel.
+- **App iOS:** Capacitor empacota o build Next.js num shell nativo — mesmas rotas, mesma UI.
+- **APIs nativas:** plugins Capacitor para push notifications, armazenamento seguro de tokens e splash screen.
 - **Resultado:** uma única base de código, dois canais de distribuição — App Store e navegador.
 
 ### 2.2 Stack Completa
 
-#### Frontend — App iOS (React Native / Expo)
+#### Frontend — iOS (Capacitor)
 
 | Tecnologia | Justificativa |
 |---|---|
-| React Native 0.75 + Expo SDK 52 | Build iOS sem Xcode local via EAS, OTA updates |
-| Expo Router v4 | File-based routing, deep links nativos, URL sharing |
-| NativeWind v4 | Tailwind classes no RN — design tokens compartilhados |
-| React Query (TanStack v5) | Cache, background sync, offline mutations |
-| Zustand | Estado global leve (auth, preferências, offline queue) |
-| Expo Notifications | Push notifications para lembretes de check-in e medicação |
-| Expo SecureStore | Armazenamento seguro de tokens JWT no device |
-| React Native Reanimated 3 | Animações fluidas (mood picker, streaks) |
-| date-fns | Manipulação de datas e timezones |
+| Capacitor | Empacota o build Next.js num shell nativo iOS — App Store ready |
+| `@capacitor/push-notifications` | Push notifications para lembretes de check-in e medicação |
+| `@capacitor/preferences` | Armazenamento seguro de tokens JWT no device |
+| `@capacitor/splash-screen` | Splash screen nativa |
+| `@capacitor/status-bar` | Personalização da status bar iOS |
+| Xcode | Assinatura e publicação na App Store |
 
 #### Frontend — Web (Next.js 15)
 
@@ -83,10 +80,10 @@ A escolha central é separar a experiência em duas camadas complementares — m
 |---|---|
 | Next.js 15 App Router | SSR para SEO da landing, RSC para dashboard do profissional |
 | PWA (next-pwa) | Instalável no browser, funciona offline para leitura de histórico |
-| Tailwind CSS v4 | Consistência visual com tokens do design system |
+| Tailwind CSS v3 | Consistência visual com tokens do design system |
 | Shadcn/ui | Componentes acessíveis (WCAG 2.1 AA), customizáveis |
 | Recharts | Gráficos de evolução emocional (line chart, heatmap) |
-| React Query (TanStack v5) | Mesma camada de dados do app mobile |
+| React Query (TanStack v5) | Data fetching, cache, background sync |
 | next-auth v5 | Auth com Google OAuth + magic link para pacientes |
 
 #### Backend — Supabase
@@ -105,13 +102,53 @@ A escolha central é separar a experiência em duas camadas complementares — m
 
 | Tecnologia | Justificativa |
 |---|---|
-| Expo EAS Build + Submit | CI/CD para iOS — build na nuvem, submit automático à App Store |
+| Capacitor + Xcode | Build e publicação iOS — assina e submete à App Store |
 | Vercel | Deploy do Next.js — Edge network, preview deployments por PR |
-| Turborepo | Monorepo com cache de build incremental |
 | GitHub Actions | Pipeline CI: lint, type-check, testes, deploy |
 | Sentry | Error tracking em produção (iOS + Web) |
 | PostHog | Product analytics self-hostable (eventos, funnels, session replay) |
 | Resend | Transactional emails (boas-vindas, relatórios, alertas) |
+
+---
+
+## 2.3 Estratégia Mobile — Capacitor (decisão revisada)
+
+Em vez do monorepo Turborepo com React Native/Expo previsto originalmente, o Psicare adota o **Capacitor** para empacotar o web app Next.js existente como um app iOS nativo. Essa decisão elimina a necessidade de manter duas bases de código e permite que o app chegue à App Store reaproveitando 100% do trabalho já feito no web.
+
+### Comparativo de abordagens
+
+| Critério | Capacitor (adotado) | React Native (original) |
+|---|---|---|
+| Reutiliza código atual | ✅ 100% | ❌ reescrever tudo |
+| Publicação na App Store | ✅ | ✅ |
+| Push notifications iOS | ✅ via plugin | ✅ |
+| Acesso a APIs nativas | ✅ via plugins | ✅ |
+| Base de código única | ✅ mesmo repositório | ❌ monorepo separado |
+| Performance nativa | ⚠️ WebView | ✅ nativo |
+| Esforço de implementação | Baixo | Alto |
+
+### Stack mobile revisada
+
+| Tecnologia | Função |
+|---|---|
+| **Capacitor** | Shell nativo iOS — empacota o build Next.js |
+| `@capacitor/push-notifications` | Lembretes de check-in e medicação |
+| `@capacitor/preferences` | Armazenamento seguro de tokens JWT |
+| `@capacitor/status-bar` | Personalização da status bar iOS |
+| `@capacitor/splash-screen` | Splash screen nativa |
+| Xcode | Assinatura e publicação na App Store |
+
+### Fluxo de build iOS
+
+```
+npm run build          # gera o Next.js static/export
+npx cap sync           # copia o build para o projeto iOS nativo
+npx cap open ios       # abre no Xcode para assinar e publicar
+```
+
+### Impacto na arquitetura de rotas
+
+As rotas mobile (`apps/mobile/`) descritas na seção 4.1 deixam de existir como código separado. O app iOS usa exatamente as mesmas rotas do web (`app/(app)/`, `app/(auth)/`), com layout responsivo adaptado para telas móveis via Tailwind.
 
 ---
 
@@ -150,7 +187,7 @@ A escolha central é separar a experiência em duas camadas complementares — m
                           │
 ┌─────────────────────────────────────────────────────┐
 │              INFRA & OBSERVABILIDADE                │
-│  Vercel (Web) + EAS (iOS) — deploy e distribuição   │
+│  Vercel (Web) + Capacitor + Xcode (iOS) — deploy     │
 │  Sentry — crash reporting com session context       │
 │  PostHog — analytics sem PII exposta                │
 │  GitHub Actions — CI/CD pipeline unificado          │
@@ -186,40 +223,13 @@ A escolha central é separar a experiência em duas camadas complementares — m
 
 > Escopo: apenas as rotas do usuário paciente. Rotas do profissional fora do MVP.
 
-### 4.1 Mobile — `apps/mobile/app/`
+### 4.1 Mobile (iOS via Capacitor)
 
-```
-app/
-├── _layout.tsx                        # [layout]   Root: providers, fonts, SplashScreen
-├── index.tsx                          # [public]   Redirect guard → /login ou /(tabs)/home
-│
-├── (auth)/
-│   ├── _layout.tsx                    # [layout]   Stack sem header
-│   ├── login.tsx                      # [public]   E-mail + senha + Google OAuth
-│   └── register.tsx                   # [public]   Nome, e-mail, senha
-│
-└── (tabs)/
-    ├── _layout.tsx                    # [layout]   Tab bar: Início, Hábitos, Relatórios, Perfil
-    ├── home.tsx                       # [protected] Check-in do dia, streak, resumo diário
-    ├── habits.tsx                     # [protected] Checklists de hábitos e medicação
-    ├── reports.tsx                    # [protected] Histórico, calendário, gráfico de evolução
-    └── profile.tsx                    # [protected] Conta, notificações, configurações, sair
-```
+O app iOS usa exatamente as mesmas rotas do web app. Não existe código mobile separado — o Capacitor empacota o build Next.js e o entrega como app nativo. O layout responsivo via Tailwind garante a adaptação para telas móveis.
 
-**Modais acessíveis a partir das tabs:**
+Funcionalidades nativas (push notifications, armazenamento de tokens) são acessadas via plugins Capacitor integrados ao próprio projeto Next.js.
 
-```
-app/(modals)/
-├── mood-checkin.tsx                   # [protected] MoodPicker + tags + nota (sheet)
-├── history/[date].tsx                 # [protected] Detalhe do dia selecionado
-├── habits/manage.tsx                  # [protected] Criar / editar hábito
-├── medications/[id].tsx               # [protected] Cadastrar / editar medicamento
-└── settings/
-    ├── notifications.tsx              # [protected] Horário de lembrete, canais
-    └── privacy.tsx                    # [protected] Exportar dados, deletar conta (LGPD)
-```
-
-### 4.2 Web — `apps/web/app/`
+### 4.2 Web — `app/`
 
 ```
 app/
