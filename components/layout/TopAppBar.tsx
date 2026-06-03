@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Bell, Menu } from 'lucide-react'
 import { DrawerMenu } from './DrawerMenu'
 
@@ -24,14 +25,16 @@ export function TopAppBar() {
           </button>
 
           {/* Center: Logo */}
-          <Image
-            src="/logo.svg"
-            alt="Psicare"
-            width={110}
-            height={27}
-            priority
-            className="select-none"
-          />
+          <Link href="/home" aria-label="Ir para Início">
+            <Image
+              src="/logo.svg"
+              alt="Psicare"
+              width={110}
+              height={27}
+              priority
+              className="select-none"
+            />
+          </Link>
 
           {/* Right: Notification button */}
           <button
