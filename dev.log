@@ -1,0 +1,23 @@
+
+> psicare@0.1.0 dev
+> next dev
+
+   ▲ Next.js 15.1.0
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.0.3:3000
+
+ ✓ Starting...
+ ✓ Ready in 2.2s
+ ○ Compiling /home ...
+ ✓ Compiled /home in 4.5s (643 modules)
+ GET /home 200 in 4872ms
+ ✓ Compiled in 123ms (310 modules)
+ ✓ Compiled /login in 438ms (649 modules)
+ GET /login 200 in 554ms
+ ✓ Compiled /register in 169ms (651 modules)
+ GET /register 200 in 290ms
+ GET /home 200 in 102ms
+ ✓ Compiled /_not-found in 407ms (633 modules)
+ GET /manifest.json 404 in 532ms
+ ✓ Compiled in 460ms (647 modules)
+ GET /home 200 in 149ms

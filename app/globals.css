@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --brand-primary: #5B4CF5;
+    --brand-secondary: #7C6FF7;
+    --bg-base: #F8F7FF;
+    --surface: #FFFFFF;
+    --text-primary: #1A1A2E;
+    --text-muted: #6B7280;
+    --mood-1: #EF4444;
+    --mood-2: #F97316;
+    --mood-3: #F59E0B;
+    --mood-4: #22C55E;
+    --mood-5: #3B82F6;
+    --radius-base: 12px;
+  }
+
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background-color: #F8F7FF;
+    color: #1A1A2E;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Custom scrollbar for mood selector */
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
