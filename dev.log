@@ -66,3 +66,6 @@
  GET /sobre 200 in 26ms
  GET /sobre 200 in 234ms
  GET /home 200 in 46ms
+ GET /agenda 200 in 29ms
+ GET /habits 200 in 27ms
+ GET /home 200 in 32ms

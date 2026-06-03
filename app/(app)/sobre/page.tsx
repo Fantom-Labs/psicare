@@ -71,7 +71,7 @@ export default function SobrePage() {
           {/* Descrição */}
           <div className="flex flex-col gap-3">
             <p className="text-[#1b1b22] text-[14px] font-medium leading-[22px] font-[family-name:var(--font-plus-jakarta)]">
-              O <span className="font-bold">Psicare</span> é um projeto acadêmico de plataforma digital de monitoramento emocional desenvolvido para a disciplina de Desenvolvimento Web. A plataforma conecta pacientes e profissionais de saúde mental por meio de registro diário de humor, checklists de hábitos e medicação, com foco em privacidade e continuidade terapêutica.
+              O <span className="font-bold">Psicare</span> é um projeto acadêmico de plataforma digital de monitoramento emocional desenvolvido para a disciplina de Tecnologia para Front-end. A plataforma conecta pacientes e profissionais de saúde mental por meio de registro diário de humor, checklists de hábitos e medicação, com foco em privacidade e continuidade terapêutica.
             </p>
             <p className="text-[#1b1b22] text-[14px] font-medium leading-[22px] font-[family-name:var(--font-plus-jakarta)]">
               O sistema possui dois portais distintos: o <span className="font-bold">Portal do Paciente</span>, onde o usuário registra seu humor diário, acompanha hábitos, controla medicações e visualiza seu histórico emocional; e o <span className="font-bold">Portal do Profissional</span>, voltado ao terapeuta que acompanha a evolução dos pacientes e gerencia acessos com total privacidade e conformidade com a LGPD.
