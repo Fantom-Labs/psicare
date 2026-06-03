@@ -50,3 +50,19 @@
  GET /reports 200 in 510ms
  GET /habits 200 in 39ms
  GET /home 200 in 71ms
+ ○ Compiling /sobre ...
+ ✓ Compiled /sobre in 543ms (812 modules)
+ GET /sobre 200 in 685ms
+ GET /sobre 200 in 115ms
+ GET /home 200 in 242ms
+ GET /home 200 in 34ms
+ GET /sobre 200 in 22ms
+ ✓ Compiled in 618ms (812 modules)
+ GET /sobre 200 in 227ms
+ GET /home 200 in 231ms
+ GET /home 200 in 55ms
+ GET /agenda 200 in 39ms
+ GET /habits 200 in 32ms
+ GET /sobre 200 in 26ms
+ GET /sobre 200 in 234ms
+ GET /home 200 in 46ms

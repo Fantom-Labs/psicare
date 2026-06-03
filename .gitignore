@@ -3,4 +3,24 @@
 .claude/settings.local.json
 .agents/skills
 
+# Dependencies
 node_modules
+
+# Next.js
+.next/
+out/
+
+# Logs
+*.log
+dev.log
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS
+.DS_Store
+Thumbs.db
