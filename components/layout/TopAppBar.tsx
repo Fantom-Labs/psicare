@@ -11,7 +11,7 @@ export function TopAppBar() {
 
   return (
     <>
-      <header className="lg:hidden sticky top-0 z-50 bg-white/90 backdrop-blur-[12px] border-b border-gray-100/60">
+      <header className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-[12px] border-b border-gray-100/60">
         <div className="flex items-center justify-between px-4 h-[71px]">
 
           {/* Left: Menu button (abre o drawer) */}

@@ -69,3 +69,11 @@
  GET /agenda 200 in 29ms
  GET /habits 200 in 27ms
  GET /home 200 in 32ms
+ GET /sobre 200 in 46ms
+ ✓ Compiled in 464ms (812 modules)
+ ✓ Compiled in 189ms (335 modules)
+ GET /sobre 200 in 194ms
+ GET /habits 200 in 194ms
+ GET /sobre 200 in 50ms
+ GET /habits 200 in 33ms
+ GET /home 200 in 300ms
